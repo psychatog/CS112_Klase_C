@@ -24,3 +24,5 @@ public class Echo
 	}
 
 }
+
+// Looks good.  Were you able to integrate GitHub with the IDE?
