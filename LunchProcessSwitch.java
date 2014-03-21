@@ -1,3 +1,8 @@
+// Clarence Klase
+// 03/16/2014
+// Week05 Homework
+// Prints steps involved in attaining lunch in school with a switch
+
 import java.util.Scanner;
 
 public class LunchProcessSwitch 
