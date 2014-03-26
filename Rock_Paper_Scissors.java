@@ -12,12 +12,14 @@ public class Rock_Paper_Scissors {
 	private int userChoice;
 	private int cpuChoice;
 	private Scanner input;
+	private GameHistory gameHistory;
 	
 	Rock_Paper_Scissors() {
 		
 		userChoice = UNKNOWN_COMMAND;
 		cpuChoice = UNKNOWN_COMMAND;
 		input = new Scanner(System.in);
+		gameHistory = new GameHistory();
 	}
 	
 	public void runGame() {
@@ -27,6 +29,8 @@ public class Rock_Paper_Scissors {
 			setUserChoice();
 			processGameState();
 		} while ( getBool("Do you want to play again? ") );
+		
+		gameHistory.printStats();
 	}
 	
 	private void setUserChoice() {
@@ -54,6 +58,7 @@ public class Rock_Paper_Scissors {
 	private void compareChoices() {
 		if ( userChoice == cpuChoice ) {
 			System.out.println("I chose " + toString(userChoice) +  " as well.");
+			gameHistory.incrementTieGames();
 			return;
 		}
 		compareChoice(ROCK,PAPER);
@@ -63,10 +68,14 @@ public class Rock_Paper_Scissors {
 	
 	private void compareChoice(int choiceToCompare, int losingUserChoice) {
 		if ( userChoice == choiceToCompare ) {
-			if ( cpuChoice == losingUserChoice ) 
+			if ( cpuChoice == losingUserChoice ) {
 				System.out.println("I chose " + toString(cpuChoice) +  ", you lose");
-			else 
+				gameHistory.incrementGamesLost();
+			}
+			else {
 				System.out.println("I chose " + toString(cpuChoice) +  ", YOU WIN!");
+				gameHistory.incrementGamesWon();
+			}
 		}
 	}
 
